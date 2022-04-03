@@ -94,24 +94,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (positionState == statePosition.air)
         {
-            Vector3 currentVelocity = rbody.velocity;
-            currentVelocity.y = 0;
+            if (Input.GetAxis("Vertical") > 0.3f || Input.GetAxis("Vertical") < -0.3f || Input.GetAxis("Horizontal") > 0.3f || Input.GetAxis("Horizontal") < -0.3f)
+            {
+                Vector3 currentVelocity = rbody.velocity;
+                currentVelocity.y = 0;
 
-            Vector3 moveVelocity = (transform.forward * Input.GetAxis("Vertical")) + (transform.right * Input.GetAxis("Horizontal"));
+                Vector3 moveVelocity = (transform.forward * Input.GetAxis("Vertical")) + (transform.right * Input.GetAxis("Horizontal"));
 
-            Vector3 currentMooveVelocity = moveVelocity * speed * Time.fixedDeltaTime;
+                Vector3 currentMooveVelocity = moveVelocity * speed * Time.fixedDeltaTime;
 
-            currentMooveVelocity -= currentVelocity;
+                currentMooveVelocity -= currentVelocity;
 
-            Vector3 velocity3 = currentMooveVelocity * speedOnAir * Time.fixedDeltaTime;
+                Vector3 velocity3 = currentMooveVelocity * speedOnAir * Time.fixedDeltaTime;
 
-            velocity3.y = 0;
+                velocity3.y = 0;
 
-            rbody.velocity += velocity3;
+                rbody.velocity += velocity3;
 
-            //Debug.Log(currentMooveVelocity);
+                //Debug.Log(currentMooveVelocity);
 
-
+            }
         }
 
 
